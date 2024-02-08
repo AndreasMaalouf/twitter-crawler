@@ -6,6 +6,7 @@ use App\Events\TweetInserted;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -28,6 +29,10 @@ class Tweet extends Model
         'tweet_date',
     ];
 
+    protected $casts = [
+        'tweet_date' => 'datetime',
+    ];
+
     public function setAsProcessed(): void
     {
         $this->processed = true;
@@ -37,5 +42,10 @@ class Tweet extends Model
     public function instruments(): HasMany
     {
         return $this->hasMany(TweetedInstrument::class);
+    }
+
+    public function twitterProfile(): BelongsTo
+    {
+        return $this->belongsTo(TwitterProfile::class);
     }
 }

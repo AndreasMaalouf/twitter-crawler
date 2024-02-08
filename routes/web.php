@@ -3,6 +3,7 @@
 use App\Http\Controllers\MetricsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TopMetricsController;
+use App\Http\Controllers\TweetsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -41,7 +42,14 @@ Route::get('/metrics', function () {
     return Inertia::render('Metrics');
 })->middleware(['auth', 'verified'])->name('metrics');
 
+Route::get('/tweets', function () {
+    return Inertia::render('Tweets');
+})->middleware(['auth', 'verified'])->name('tweets');
+
 Route::get('top', [TopMetricsController::class, 'index']);
 Route::get('metrics/{days}', [MetricsController::class, 'get']);
+Route::get('metrics/{days}', [MetricsController::class, 'get']);
+Route::get('tweets/all', [TweetsController::class, 'index']);
+Route::get('tweets/{tag}', [TweetsController::class, 'get']);
 
 require __DIR__.'/auth.php';

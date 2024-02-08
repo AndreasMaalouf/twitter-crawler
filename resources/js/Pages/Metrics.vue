@@ -16,7 +16,6 @@ async function getInstruments(interval = 7) {
 
     if (response.status === 200) {
         instruments.value = response.data
-        console.log(instruments.value)
     }
 }
 
