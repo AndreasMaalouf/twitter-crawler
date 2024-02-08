@@ -1,7 +1,7 @@
 ### Set up
 ```bash
 composer install
-create .env and copy .env.example into it
+# create .env and copy .env.example into it
 php artisan key:generate
 
 
