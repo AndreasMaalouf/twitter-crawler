@@ -41,7 +41,9 @@ class ProcessTweet implements ShouldQueueAfterCommit
             $matched = preg_match('/^(\$)\w+/', $word);
             if ($matched) {
                 $cleaned = preg_replace('/[,.-?!*&^#@\(\)\[\]]/', '', $word);
-                $financialInstruments[$cleaned]['instrument'] = $cleaned;
+                if (strlen($cleaned) > 1) {
+                    $financialInstruments[$cleaned]['instrument'] = $cleaned;
+                }
             }
         }
 
