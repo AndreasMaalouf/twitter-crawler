@@ -63,7 +63,9 @@ class CrawlerExtractorTest extends TestCase
                         class="css-1qaijid r-bcqeeo r-qvutc0 r-poiln3" style="text-overflow: unset;">: +35%
                         Gold </span> $GLD<span
                         class="css-1qaijid r-bcqeeo r-qvutc0 r-poiln3" style="text-overflow: unset;">: -6%
-                        </span>
+                        </span> $<span
+                        class="css-1qaijid r-bcqeeo r-qvutc0 r-poiln3" style="text-overflow: unset;">: -6%
+                        </span>: -6%
                         <time datetime="2021-09-19T13:33:48.000Z">3:33 pm · 19 Sep 2021</time>
                     </div>      
         </body>
