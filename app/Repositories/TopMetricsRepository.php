@@ -19,7 +19,7 @@ class TopMetricsRepository implements MetricsRepositoryContract
 
     public function getData(): Collection
     {
-        $topInstruments = Cache::get(self::TOP_KEY);
+        $topInstruments = Cache::get($this->getCacheKey());
         if ($topInstruments) {
             return $topInstruments;
         }
@@ -38,7 +38,7 @@ class TopMetricsRepository implements MetricsRepositoryContract
     {
         $instruments = $this->fetchData();
 
-        Cache::put(self::TOP_KEY, $instruments, now()->addMinutes(60));
+        Cache::put($this->getCacheKey(), $instruments, now()->addMinutes(60));
 
         return $instruments;
     }

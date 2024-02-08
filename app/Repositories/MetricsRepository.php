@@ -23,7 +23,7 @@ class MetricsRepository implements MetricsRepositoryContract
 
     public function getData()
     {
-        $data = Cache::get(self::KEY.$this->daysSince);
+        $data = Cache::get($this->getCacheKey());
 
         if ($data) {
             return $data;
@@ -41,7 +41,7 @@ class MetricsRepository implements MetricsRepositoryContract
     {
         $data = $this->fetchData();
 
-        Cache::put(self::KEY.$this->daysSince, $data, now()->addMinutes(30));
+        Cache::put($this->getCacheKey(), $data, now()->addMinutes(30));
 
         return $data;
     }
