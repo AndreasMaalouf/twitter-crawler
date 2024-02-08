@@ -12,6 +12,9 @@ class CrawlerExtractorTest extends TestCase
 {
     use RefreshDatabase;
 
+    /**
+     * This is an integration of everything that comes after crawling
+     */
     public function test_crawler_working_correctly()
     {
         $twitterHandle = 'charliebilello';

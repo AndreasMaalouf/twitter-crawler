@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Events\TweetInserted;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @property string $tweet_id
  * @property string $tweet_text
+ * @property Carbon $tweet_date
  * @property bool $processed
  */
 class Tweet extends Model
