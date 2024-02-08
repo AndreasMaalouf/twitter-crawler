@@ -17,7 +17,7 @@ class CacheMetrics implements ShouldQueue
     {
         (new TopMetricsRepository)->cacheAllData();
 
-        $ranges = [7, 30, 120, 365];
+        $ranges = [1, 7, 30, 120, 365];
         foreach ($ranges as $range) {
             (new MetricsRepository)->setDaysSince($range)->cacheAllData();
         }

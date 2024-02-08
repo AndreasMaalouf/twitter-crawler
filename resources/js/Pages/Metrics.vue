@@ -8,7 +8,7 @@ const instruments = ref([])
 
 const days = ref(7)
 
-const timeFrames = ref([7, 30, 120, 365])
+const timeFrames = ref([1, 7, 30, 120, 365])
 
 async function getInstruments(interval = 7) {
     days.value = interval
