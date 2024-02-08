@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TweetRequest;
 use App\Http\Resources\TweetResource;
 use App\Models\Tweet;
 use App\Models\TweetedInstrument;
@@ -21,10 +22,9 @@ class TweetsController extends Controller
      *
      * @apiResourceModel App\Models\Tweet 
      */
-    public function get(string $tag)
+    public function get(TweetRequest $request)
     {
-        $instruments = TweetedInstrument::select('instrument')->groupBy('instrument')->get()->keyBy('instrument')->toArray();
-        abort_if(! isset($instruments[$tag]), Response::HTTP_BAD_REQUEST, 'Tag Not Found');
+        $tag = $request->route('tag');
 
         return TweetResource::collection(Tweet::with('twitterProfile')->whereHas('instruments', function ($query) use ($tag) {
             $query->where('instrument', $tag);

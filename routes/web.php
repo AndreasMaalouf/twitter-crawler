@@ -48,7 +48,6 @@ Route::get('/tweets', function () {
 
 Route::get('top', [TopMetricsController::class, 'index']);
 Route::get('metrics/{days}', [MetricsController::class, 'get']);
-Route::get('metrics/{days}', [MetricsController::class, 'get']);
 Route::get('tweets/all', [TweetsController::class, 'index']);
 Route::get('tweets/{tag}', [TweetsController::class, 'get']);
 
