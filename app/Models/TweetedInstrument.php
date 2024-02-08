@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property string $instrument
+ * @property string $tweet_id
+ */
 class TweetedInstrument extends Model
 {
     use HasFactory, HasUuids;
