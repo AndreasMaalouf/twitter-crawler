@@ -29,7 +29,7 @@ class TweetFactory extends Factory
             'twitter_profile_id' => (new TwitterProfileFactory)->create(['twitter_handle' => Str::random(10)]),
             'tweet_text' => fake()->text('150'),
             'tweet_date' => now(),
-            'tweet_id' => fake()->randomNumber()+fake()->randomNumber(),
+            'tweet_id' => fake()->randomNumber()+time()+fake()->randomNumber(),
         ];
     }
 }
