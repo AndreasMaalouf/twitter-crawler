@@ -28,7 +28,7 @@ class TwitterCrawler
         // the data on the mysql server hosted in a container.
         config(['database.connections.mysql.host' => '0.0.0.0']);
 
-        $twitterProfiles = TwitterProfile::query()->where('should_scrape', true)->all();
+        $twitterProfiles = TwitterProfile::query()->where('should_scrape', true)->get();
 
         foreach ($twitterProfiles as $twitterProfile)
         {
