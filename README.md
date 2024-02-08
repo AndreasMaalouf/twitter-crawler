@@ -2,6 +2,7 @@
 ```bash
 composer install
 create .env and copy .env.example into it
+php artisan key:generate
 
 
 ./vendor/bin/sail up
