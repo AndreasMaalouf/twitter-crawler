@@ -11,10 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class TweetsController extends Controller
 {
-    public function __construct(private MetricsRepository $metricsRepository)
-    {
-    }
-
     /**
      * Returns latest 15 tweets for a tag
      *
