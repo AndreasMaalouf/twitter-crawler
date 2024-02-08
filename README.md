@@ -32,8 +32,29 @@ php artisan app:run-twitter-crawler
 
 ### Curl
 
-```
+```bash
+# fetch the top instruments in the last 1000 days
 curl 0.0.0.0/metrics/1000
 
+# fetch the top instruments historically
 curl 0.0.0.0/top
 ```
+
+### How it works
+
+#### Ingesting the tweets
+1. Job runs depending on the priority of the twitter user.
+2. Crawls page using Spatie's Crawler and Browsershot.
+3. Extract crawled data using DOMdocument and DOMXPath.
+4. Fire event with a queued listener to ingest the tweet.
+5. After ingestion another event with a queued listener is fired to parse the tweet and mark it as processed.
+6. Crawling failures will be stored to be reprocessed.
+
+#### Showing the statistics
+> The data will be changing every few minutes so a job will be running to the data that will be shown to the user.
+>
+> This cached data is what will be returned to the user through the website or through the apis.
+
+1. Repository classes are injected into the controllers.
+2. Repository will attempt to fetch the data from cache.
+3. If no data was found repository will fall back to db and cache the results.
