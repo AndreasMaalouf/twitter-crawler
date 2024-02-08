@@ -2,11 +2,12 @@
 
 namespace App\Repositories\Contracts;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
 abstract class MetricsRepositoryContract
 {
-    public function getData()
+    public function getData(): Collection
     {
         $data = Cache::get($this->getCacheKey());
 
@@ -26,12 +27,14 @@ abstract class MetricsRepositoryContract
     {
         $data = $this->fetchData();
 
-        Cache::put($this->getCacheKey(), $data, now()->addMinutes(30));
+        if (! $data->isEmpty()) {
+            Cache::put($this->getCacheKey(), $data, now()->addMinutes(30));
+        }
 
         return $data;
     }
 
-    abstract function fetchData();
+    abstract function fetchData(): Collection;
 
     abstract function getCacheKey();
 }

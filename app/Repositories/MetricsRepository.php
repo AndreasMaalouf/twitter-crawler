@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\TweetedInstrument;
 use App\Repositories\Contracts\MetricsRepositoryContract;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 class MetricsRepository extends MetricsRepositoryContract
@@ -19,7 +20,7 @@ class MetricsRepository extends MetricsRepositoryContract
         return $this;
     }
 
-    public function fetchData()
+    public function fetchData(): Collection
     {
         $data = TweetedInstrument::query()->whereHas('tweet', function ($query) {
             $query->whereDate('tweet_date', '>', now()->subDays($this->daysSince));
