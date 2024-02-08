@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
-class TopMetricsRepository implements MetricsRepositoryContract
+class TopMetricsRepository extends MetricsRepositoryContract
 {
     private const TOP_KEY = 'top_instruments_of_all_time';
     private const INSTRUMENT_ALL_TIME = 'instrument_all_time_record_';
@@ -16,31 +16,11 @@ class TopMetricsRepository implements MetricsRepositoryContract
     private const COUNT_KEY = 'total';
     private const INSTRUMENT_KEY = 'instrument';
 
-
-    public function getData(): Collection
-    {
-        $topInstruments = Cache::get($this->getCacheKey());
-        if ($topInstruments) {
-            return $topInstruments;
-        }
-
-        return $this->fetchAndCacheData();
-    }
-
     public function cacheAllData(): void
     {
         $instruments = $this->fetchAndCacheData();
 
         $this->cacheInstrumentsCount($instruments);
-    }
-
-    public function fetchAndCacheData(): Collection
-    {
-        $instruments = $this->fetchData();
-
-        Cache::put($this->getCacheKey(), $instruments, now()->addMinutes(60));
-
-        return $instruments;
     }
 
     public function fetchData(): Collection

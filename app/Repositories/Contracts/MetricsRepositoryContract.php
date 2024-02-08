@@ -2,15 +2,36 @@
 
 namespace App\Repositories\Contracts;
 
-interface MetricsRepositoryContract
+use Illuminate\Support\Facades\Cache;
+
+abstract class MetricsRepositoryContract
 {
-    public function getData();
+    public function getData()
+    {
+        $data = Cache::get($this->getCacheKey());
 
-    public function cacheAllData();
+        if ($data) {
+            return $data;
+        }
 
-    public function fetchAndCacheData();
+        return $this->fetchAndCacheData();
+    }
 
-    public function fetchData();
+    public function cacheAllData(): void
+    {
+        $this->fetchAndCacheData();
+    }
 
-    public function getCacheKey();
+    public function fetchAndCacheData()
+    {
+        $data = $this->fetchData();
+
+        Cache::put($this->getCacheKey(), $data, now()->addMinutes(30));
+
+        return $data;
+    }
+
+    abstract function fetchData();
+
+    abstract function getCacheKey();
 }

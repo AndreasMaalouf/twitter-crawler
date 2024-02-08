@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Repositories\InstrumentRepository;
 use App\Repositories\MetricsRepository;
 use App\Repositories\TopMetricsRepository;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -16,6 +17,7 @@ class CacheMetrics implements ShouldQueue
     public function handle()
     {
         (new TopMetricsRepository)->cacheAllData();
+        (new InstrumentRepository)->cacheAllData();
 
         $ranges = [1, 7, 30, 120, 365];
         foreach ($ranges as $range) {
